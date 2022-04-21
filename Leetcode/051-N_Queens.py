@@ -5,19 +5,13 @@ class Solution:
         def convert_arr(arr):
             return  [''.join(['Q' if arr[i][j] == 1 else '.' for j in range(n)]) for i in range(n)]
 
-        def erase_board(arr, row, col):
-            arr[row][col] = 0
-            for i in range(row+1, n): 
-                arr[i][col] += 1
-                offset = i - row
-                if col + offset < n: arr[i][col + offset] += 1
-                if col - offset >= 0: arr[i][col-offset] += 1
-        def update_board(arr, row, col):
+
+        def update_board(arr, row, col, erase:bool=0):
             for i in range(row+1, n): 
                 arr[i][col] -= 1
                 offset = i - row
-                if col + offset < n: arr[i][col + offset] -= 1
-                if col - offset >= 0: arr[i][col-offset] -= 1
+                if col + offset < n: arr[i][col + offset] = arr[i][col + offset] +  1 if erase else arr[i][col + offset] - 1
+                if col - offset >= 0: arr[i][col-offset] = arr[i][col-offset] + 1 if erase else arr[i][col-offset] - 1
 
 
         list_arrs = list()
@@ -32,7 +26,7 @@ class Solution:
                 for i in range(n):
                     if row+1 < n and arr[row+1][i] == 0: DFS_queen(arr, row+1, i)
                 if row == n-1: list_arrs.append(convert_arr(arr))
-                erase_board(arr, row, col)
+                update_board(arr, row, col, erase=1)
             return None
 
         for i in range(n): 
