@@ -2,27 +2,18 @@ from typing import List
 
 class Solution:
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
-        def BFS(i, j):
-            queue = [(i,j)]
-            visited = set()
-            depth = 0
-            while queue:
-                depth_size = len(queue)             
-                while depth_size:
-                    i, j = queue.pop(0)
-                    if (i,j) not in visited:
-                        visited.add((i,j))
-                        for x, y in [(1,0), (0,1), (-1,0), (0,-1)]:
-                            if 0<=i+x<len(mat) and 0<=j+y<len(mat[0]): 
-                                if mat[i+x][j+y]: queue.append((i+x, j+y))
-                                elif not mat[i+x][j+y]: return depth+1
-                    depth_size -= 1
-                depth += 1
-            return depth
-
+        queue = []
         for i in range(len(mat)):
             for j in range(len(mat[i])):
-                if mat[i][j]: mat[i][j] = BFS(i, j)
+                if mat[i][j]: mat[i][j] = -1
+                else: queue.append((i, j))
+
+        while queue:
+            i, j = queue.pop(0)
+            for x, y in [(1,0), (0,1), (-1,0), (0,-1)]:
+                if 0<=i+x<len(mat) and 0<=j+y<len(mat[0]) and mat[i+x][j+y] == -1:
+                    mat[i+x][j+y] = mat[i][j] + 1
+                    queue.append((i+x, j+y))
         return mat
 
 solution = Solution()
