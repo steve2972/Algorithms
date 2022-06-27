@@ -5,11 +5,11 @@ choose = 6
 
 
 def solve(nums):
-   temp = [[]]
-   for num in nums:
-       temp += [i + [num] for i in temp]
-   for arr in temp:
-       if len(arr) == choose: ans.append(arr)
+    temp = [[]]
+    for num in nums:
+        temp += [i + [num] for i in temp]
+    for arr in temp:
+        if len(arr) == choose: ans.append(arr)
 
 # def solve(a):
 #     last_num = a[-1]
@@ -28,5 +28,5 @@ def solve(nums):
 #         solve(a)
 #         a.pop()
 
-solve(a)
+solve(all_num_list)
 print(ans)

@@ -42,5 +42,4 @@ matrix = [
     [0,0,0,0,0,0,0,0,0,0]
 ]
 
-#matrix = [[9,9,4],[6,6,8],[2,1,1]]
 print(longestIncreasingPath(matrix))
