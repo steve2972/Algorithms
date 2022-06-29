@@ -1,6 +1,6 @@
 import sys
 sys.path.append('.')
-from Algorithms.LinkedList import ListNode, add_nodes, print_nodes
+from Utils.DataStructures.LinkedList import ListNode, add_nodes, print_nodes
 from typing import Optional
 
 class Solution:
