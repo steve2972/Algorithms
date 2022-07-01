@@ -82,7 +82,6 @@ def solution(info, query):
     
     return answer
 
-
 def solution_numpy(info, query):
     list_candidates = np.array([i.split(" ") for i in info])
     answer = []
@@ -97,6 +96,21 @@ def solution_numpy(info, query):
                 
     return answer
 
+def solution2(info, query):
+    specs = [i.split(" ") for i in info]
+    answer = []
+
+    for q in query:
+        criteria = [i for i in q.split(' ') if i != 'and']
+        res = [specs[i] for i in range(len(specs))
+                if (specs[i][0] == criteria[0] or criteria[0] == '-') and
+                (specs[i][1] == criteria[1] or criteria[1] == '-') and
+                (specs[i][2] == criteria[2] or criteria[2] == '-') and
+                (specs[i][3] == criteria[3] or criteria[3] == '-') and
+                (int(specs[i][4]) >= int(criteria[4]) or criteria[4] == '-')]
+        answer.append(len(res))
+
+    return answer
 
 
 info = [
@@ -117,4 +131,51 @@ query = [
 ]
 
 
-print(solution(info, query))
+print(solution2(info, query))
+
+
+####################정답 코드
+#https://soniacomp.medium.com/%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%88%9C%EC%9C%84%EA%B2%80%EC%83%89-%ED%8C%8C%EC%9D%B4%EC%8D%AC-2021-blind-test-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4-ba2325d9598f
+
+from bisect import bisect_left
+from itertools import combinations
+
+def make_all_cases(separate_info):
+    cases = []
+    for k in range(5):
+        for condition in combinations([0,1,2,3], k):
+            case = []
+            for idx in range(4):
+                if idx not in condition:
+                    case.append(separate_info[idx])
+                else:
+                    case.append('-')
+            cases.append(''.join(case))
+    return cases
+
+def solution(info, query):
+    answer = []
+    all_people = {}
+    for i in info:
+        seperate_info = i.split()
+        cases = make_all_cases(seperate_info)
+        for case in cases:
+            if case not in all_people.keys():
+                all_people[case] = [int(seperate_info[4])]
+            else:
+                all_people[case].append(int(seperate_info[4]))
+    
+    for key in all_people.keys():
+        all_people[key].sort()
+        
+    for q in query:
+        seperate_q = q.split(' and ')
+        seperate_q.extend(seperate_q.pop().split())
+        target = ''
+        for sq in seperate_q[:4]:
+            target += sq
+        if target in all_people.keys():
+            answer.append(len(all_people[target]) - bisect_left(all_people[target], int(seperate_q[4]), lo=0, hi=len(all_people[target])))
+        else:
+            answer.append(0)
+    return answer
