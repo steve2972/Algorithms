@@ -1,32 +1,12 @@
-all_num_list = [1,2,3,4,5,6,7]
-a = [1]
-ans = []
-choose = 6
+arr = [1,2,3,4,5,6,7]
 
-
-def solve(nums):
+def power_set(nums, n:int):
+    ans = []
     temp = [[]]
     for num in nums:
         temp += [i + [num] for i in temp]
     for arr in temp:
-        if len(arr) == choose: ans.append(arr)
+        if len(arr) == n: ans.append(arr)
+    return ans
 
-# def solve(a):
-#     last_num = a[-1]
-#     last_num_idx = all_num_list.index(last_num)
-
-#     addition_count = choose - len(a)
-#     addition_range = all_num_list.index(all_num_list[-addition_count])
-
-#     if len(a) == 6:
-
-#         ans.append(a[:])
-#         return
-    
-#     for i in range(last_num_idx + 1, addition_range+1):
-#         a.append(all_num_list[i])
-#         solve(a)
-#         a.pop()
-
-solve(all_num_list)
-print(ans)
+print(power_set(arr, 6))
