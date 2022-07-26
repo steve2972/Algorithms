@@ -1,1 +1,1 @@
-print(sum(list(map(int,input().split()))))
+print(eval('+'.join(input())))
