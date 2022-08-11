@@ -1,11 +1,9 @@
 blue = [[0]*6 for _ in range(4)]
 green = [[0]*6 for _ in range(4)]
-
 def find(t,x):
     for i in range(6):
         if t[x][i]==1: return i-1
     return 5
-
 def place(t,x,y):
     b = find(blue,x)
     g = find(green,y)
@@ -21,13 +19,11 @@ def place(t,x,y):
 check = lambda t,c: sum([t[r][c] for r in range(4)])
 shift = lambda t,r,c: [0,*t[r][:c],*t[r][c+1:]]
 change = lambda t,c: [shift(t,r,c) for r in range(4)]
-
 score = 0
 n = int(input())
 for _ in range(n):
     t,x,y=map(int,input().split())
     place(t,x,y)
-    flag=0
     for c in range(2, 6):
         if check(blue,c)==4:
             score += 1
