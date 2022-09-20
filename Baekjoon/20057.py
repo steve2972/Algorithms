@@ -5,7 +5,6 @@ dx=[-1,0,1,0]
 dy=[0,1,0,-1]
 ds=[[[1,0],[-1,0]],[[1,1],[-1,1]],[[2,1],[-2,1]],[[1,2],[-1,2]],[[0,3]],[[0,2]]]
 d,out=0,0
-
 def move(r,c,d):
     global out
     nr,nc=r+dy[d],c+dx[d]
@@ -22,7 +21,6 @@ def move(r,c,d):
             if 0<=r+dr<n and 0<=c+dc<n: grid[r+dr][c+dc]+=pdust[i]
             else: out+=pdust[i]
     return nr,nc 
-
 for m in range(1,n+1):
     if m==n:
         for m in range(n-1): r,c=move(r,c,d)
