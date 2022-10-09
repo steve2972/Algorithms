@@ -10,14 +10,13 @@ def rotate_clockwise(arr):
             i+=1
             j-=1
 
-def rotate_counter(arr):
-    for l in range(len(arr)):
-        i,j = 0,len(arr[l])-1
-        while i < j:
-            arr[l][i],arr[l][j] = arr[l][j],arr[l][i]
-            i+=1
-            j-=1
+def rotate():
     transpose(arr)
+    for l in range(len(arr)):
+        i,j=0,len(arr)-1
+        while i<j:
+            arr[i][l],arr[j][l]=arr[j][l],arr[i][l]
+            i+=1;j-=1
 
 arr = [
     [1,2,3,4,5],
