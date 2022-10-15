@@ -1,3 +1,5 @@
+# Always re-check r,c values of functions using check methods
+
 R,C,K=map(int,input().split())
 heaters = []
 checks = []
