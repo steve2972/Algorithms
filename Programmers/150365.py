@@ -16,7 +16,7 @@ def solution(n, m, x, y, r, c, k):
             nx, ny = x + dr[i], y + dc[i]
             if l1(nx, ny, r, c) > k - d - 1: continue
             if not (0 < nx <= n and 0 < ny <= m): continue
-            q.append((nx, ny, s + ds[i], d + 1))
+            q.append((nx, ny, s + ds[i], d + 1)) # type: ignore
             break
     return 'impossible'
     
